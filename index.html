@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xchel Dominguez | Developer & Creator</title>
-    
+
     <!-- SEO -->
     <meta name="description" content="Xchel Dominguez - Developer, creator, and automation enthusiast building projects in Las Vegas.">
     <meta name="keywords" content="Xchel Dominguez, developer, web development, Las Vegas, portfolio">
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Xchel Dominguez | Developer & Creator">
     <meta property="og:description" content="Developer, creator, and automation enthusiast building projects in Las Vegas.">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🦾%3C/text%3E%3C/svg%3E">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+
     <style>
         /* CSS Variables for theming */
         :root {
@@ -40,6 +40,7 @@
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
         [data-theme="dark"] {
@@ -173,6 +174,12 @@
             color: var(--accent);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -189,6 +196,33 @@
 
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        .nav-github {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-github:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .nav-github svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* Hero Section */
@@ -462,10 +496,14 @@
         }
 
         .project-card {
+            display: flex;
+            flex-direction: column;
             background: var(--bg-tertiary);
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
             transition: all 0.3s ease;
         }
 
@@ -477,6 +515,10 @@
 
         .project-header {
             padding: 2rem 2rem 1rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
         .project-icon {
@@ -487,13 +529,35 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            flex-shrink: 0;
         }
 
         .project-card:nth-child(1) .project-icon { background: var(--gradient-1); }
         .project-card:nth-child(2) .project-icon { background: var(--gradient-2); }
         .project-card:nth-child(3) .project-icon { background: var(--gradient-3); }
-        .project-card:nth-child(4) .project-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .project-card:nth-child(4) .project-icon { background: var(--gradient-4); }
+
+        .project-external {
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .project-external svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .project-card:hover .project-external {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
 
         .project-title {
             font-size: 1.25rem;
@@ -506,6 +570,7 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             padding: 0 2rem 1.5rem;
+            flex-grow: 1;
         }
 
         .project-tags {
@@ -700,6 +765,18 @@
             font-size: 0.9rem;
         }
 
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -752,6 +829,11 @@
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
             }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -780,13 +862,19 @@
     <nav id="navbar">
         <div class="nav-content">
             <a href="#" class="logo"><span>&lt;</span>xchel<span>/&gt;</span></a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="https://github.com/xcheljd" target="_blank" rel="noopener noreferrer" class="nav-github">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -811,17 +899,17 @@
         <!-- About -->
         <section class="about" id="about">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">01 // About</span>
                     <h2 class="section-title">A bit about me</h2>
                 </div>
                 <div class="about-content">
-                    <div class="about-text">
-                        <p>I'm a General Manager at Citizen Watch Company by day, and a developer/automation tinkerer by night. I love building things that solve real problems — whether that's a website for a local coffee shop or a trading bot that runs itself.</p>
+                    <div class="about-text reveal">
+                        <p>I'm a General Manager at Citizen Watch Company by day, and a developer/automation tinkerer by night. I love building things that solve real problems — whether that's a self-hosted CRM, a desktop study app, or a Rust CLI that shrinks PDFs.</p>
                         <p>My background in retail leadership taught me how to communicate clearly, manage complex operations, and stay organized. I bring that same discipline to my code.</p>
                         <p>Currently diving deep into networking (CCNA track), exploring Japanese language and culture, and always looking for the next project to sink my teeth into.</p>
                     </div>
-                    <div class="about-stats">
+                    <div class="about-stats reveal">
                         <div class="stat-card">
                             <span class="stat-number">9+</span>
                             <span class="stat-label">Years in Leadership</span>
@@ -831,12 +919,12 @@
                             <span class="stat-label">Coffee Consumed</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Projects Built</span>
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Open-Source Projects</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">1</span>
-                            <span class="stat-label">AI Assistant (Jarvis)</span>
+                            <span class="stat-number">64</span>
+                            <span class="stat-label">CCNA Modules Shipped</span>
                         </div>
                     </div>
                 </div>
@@ -846,23 +934,23 @@
         <!-- Skills -->
         <section class="skills" id="skills">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">02 // Skills</span>
                     <h2 class="section-title">What I work with</h2>
                 </div>
-                <div class="skills-grid">
-                    <div class="skill-tag">JavaScript</div>
+                <div class="skills-grid reveal">
                     <div class="skill-tag">TypeScript</div>
+                    <div class="skill-tag">JavaScript</div>
                     <div class="skill-tag">Python</div>
-                    <div class="skill-tag">HTML/CSS</div>
+                    <div class="skill-tag">Rust</div>
                     <div class="skill-tag">React</div>
-                    <div class="skill-tag">Node.js</div>
+                    <div class="skill-tag">Next.js</div>
+                    <div class="skill-tag">Electron</div>
+                    <div class="skill-tag">Tailwind CSS</div>
+                    <div class="skill-tag">SQLite</div>
                     <div class="skill-tag">Docker</div>
-                    <div class="skill-tag">Git</div>
                     <div class="skill-tag">Linux</div>
                     <div class="skill-tag">Networking</div>
-                    <div class="skill-tag">Automation</div>
-                    <div class="skill-tag">OpenClaw</div>
                 </div>
             </div>
         </section>
@@ -870,59 +958,63 @@
         <!-- Projects -->
         <section class="projects" id="projects">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">03 // Projects</span>
                     <h2 class="section-title">Things I've built</h2>
                 </div>
                 <div class="projects-grid">
-                    <article class="project-card">
+                    <a href="https://github.com/xcheljd/iris" target="_blank" rel="noopener noreferrer" class="project-card reveal">
                         <div class="project-header">
-                            <div class="project-icon">☕</div>
-                            <h3 class="project-title">Yaw Farm Coffee</h3>
+                            <div class="project-icon">🤝</div>
+                            <span class="project-external"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
                         </div>
-                        <p class="project-desc">Designed and built a modern website for Yaw Farm Coffee Roasters, Vegas's #1 rated coffee shop on Yelp. Clean, accessible, and mobile-first.</p>
+                        <h3 class="project-title">Iris</h3>
+                        <p class="project-desc">Self-hosted retail clienteling CRM — clients, product catalog, promotions, follow-ups, and analytics. Next.js + SQLite, single process, zero external services.</p>
                         <div class="project-tags">
-                            <span class="project-tag">HTML/CSS</span>
-                            <span class="project-tag">Responsive</span>
-                            <span class="project-tag">Accessibility</span>
+                            <span class="project-tag">Next.js</span>
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">SQLite</span>
                         </div>
-                    </article>
-                    <article class="project-card">
+                    </a>
+                    <a href="https://github.com/xcheljd/talaria" target="_blank" rel="noopener noreferrer" class="project-card reveal">
                         <div class="project-header">
-                            <div class="project-icon">🤖</div>
-                            <h3 class="project-title">Kalshi Trading Bot</h3>
+                            <div class="project-icon">✉️</div>
+                            <span class="project-external"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
                         </div>
-                        <p class="project-desc">Automated trading bot for Kalshi prediction markets. Dockerized for easy deployment and designed to run autonomously.</p>
+                        <h3 class="project-title">Talaria</h3>
+                        <p class="project-desc">Campaign email & customer-communication template generator that any brand can configure to its own store, products, and branding. React web app + optional Tauri desktop build.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">Docker</span>
-                            <span class="project-tag">APIs</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Tauri</span>
+                            <span class="project-tag">TypeScript</span>
                         </div>
-                    </article>
-                    <article class="project-card">
+                    </a>
+                    <a href="https://github.com/xcheljd/picamatl" target="_blank" rel="noopener noreferrer" class="project-card reveal">
                         <div class="project-header">
-                            <div class="project-icon">🦾</div>
-                            <h3 class="project-title">Jarvis AI Assistant</h3>
+                            <div class="project-icon">📄</div>
+                            <span class="project-external"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
                         </div>
-                        <p class="project-desc">Personal AI automation system built on OpenClaw. Handles reminders, web tasks, and acts as my coding companion via Telegram.</p>
+                        <h3 class="project-title">Picamatl</h3>
+                        <p class="project-desc">Pure-Rust PDF size optimizer. Downsamples over-resolution images to their effective on-page DPI, lossless by default, fail-safe on untrusted input. MIT/Apache-2.0.</p>
                         <div class="project-tags">
-                            <span class="project-tag">OpenClaw</span>
-                            <span class="project-tag">Automation</span>
-                            <span class="project-tag">Telegram</span>
+                            <span class="project-tag">Rust</span>
+                            <span class="project-tag">CLI</span>
+                            <span class="project-tag">PDF</span>
                         </div>
-                    </article>
-                    <article class="project-card">
+                    </a>
+                    <a href="https://github.com/xcheljd/CCNA-Modules" target="_blank" rel="noopener noreferrer" class="project-card reveal">
                         <div class="project-header">
                             <div class="project-icon">🌐</div>
-                            <h3 class="project-title">PiHole Network</h3>
+                            <span class="project-external"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
                         </div>
-                        <p class="project-desc">Self-hosted network-wide ad blocking via PiHole. Docker deployment with monitoring and custom blocklists.</p>
+                        <h3 class="project-title">CCNA-Modules</h3>
+                        <p class="project-desc">Open-source desktop companion for Jeremy's IT Lab CCNA 200-301 course. 64 modules with videos, Packet Tracer labs, Anki flashcards, progress analytics & 14 themes.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Docker</span>
-                            <span class="project-tag">Networking</span>
-                            <span class="project-tag">DNS</span>
+                            <span class="project-tag">Electron</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Tailwind CSS</span>
                         </div>
-                    </article>
+                    </a>
                 </div>
             </div>
         </section>
@@ -930,12 +1022,12 @@
         <!-- Experience -->
         <section class="experience" id="experience">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">04 // Experience</span>
                     <h2 class="section-title">Where I've been</h2>
                 </div>
                 <div class="timeline">
-                    <div class="timeline-item">
+                    <div class="timeline-item reveal">
                         <div class="timeline-dot"></div>
                         <div class="timeline-date">2016 — Present</div>
                         <h3 class="timeline-title">General Manager</h3>
@@ -949,12 +1041,12 @@
         <!-- Goals -->
         <section class="goals" id="goals">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">05 // Goals</span>
                     <h2 class="section-title">What I'm working toward</h2>
                 </div>
                 <div class="goals-grid">
-                    <div class="goal-card">
+                    <div class="goal-card reveal">
                         <div class="goal-icon">🎓</div>
                         <h3 class="goal-title">CCNA Certification</h3>
                         <p class="goal-desc">Studying networking fundamentals with a goal to transition into a network engineering or data center role.</p>
@@ -962,7 +1054,7 @@
                             <div class="goal-progress-bar" style="width: 30%;"></div>
                         </div>
                     </div>
-                    <div class="goal-card">
+                    <div class="goal-card reveal">
                         <div class="goal-icon">🇯🇵</div>
                         <h3 class="goal-title">Japanese Language</h3>
                         <p class="goal-desc">Learning Japanese for fun and cultural appreciation. Currently mastering hiragana and basic conversation.</p>
@@ -970,12 +1062,12 @@
                             <div class="goal-progress-bar" style="width: 10%;"></div>
                         </div>
                     </div>
-                    <div class="goal-card">
+                    <div class="goal-card reveal">
                         <div class="goal-icon">💼</div>
-                        <h3 class="goal-title">Web Design Business</h3>
-                        <p class="goal-desc">Building a side hustle creating websites for local businesses. Starting with Yaw Farm Coffee as a portfolio piece.</p>
+                        <h3 class="goal-title">Open Source</h3>
+                        <p class="goal-desc">Growing my portfolio of open-source tools — CRMs, desktop apps, and CLIs that solve real problems for real people.</p>
                         <div class="goal-progress">
-                            <div class="goal-progress-bar" style="width: 20%;"></div>
+                            <div class="goal-progress-bar" style="width: 40%;"></div>
                         </div>
                     </div>
                 </div>
@@ -985,24 +1077,20 @@
         <!-- Contact -->
         <section class="contact" id="contact">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
                     <span class="section-label">06 // Contact</span>
                     <h2 class="section-title">Let's connect</h2>
                 </div>
                 <div class="contact-content">
                     <p>Whether you have a project idea, want to chat about tech, or just want to say hi — I'd love to hear from you.</p>
                     <div class="contact-links">
-                        <a href="mailto:xchel@example.com" class="contact-link">
+                        <a href="mailto:xcheljd.career@proton.me" class="contact-link">
                             <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                             Email
                         </a>
                         <a href="https://github.com/xcheljd" target="_blank" rel="noopener noreferrer" class="contact-link">
                             <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                             GitHub
-                        </a>
-                        <a href="https://linkedin.com/in/xcheldominguez" target="_blank" rel="noopener noreferrer" class="contact-link">
-                            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            LinkedIn
                         </a>
                     </div>
                 </div>
@@ -1042,6 +1130,18 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
